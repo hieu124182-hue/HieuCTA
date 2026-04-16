@@ -174,10 +174,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Be Vie
     <div class="brand">
       <div class="brand-row">
         <div class="brand-ico">🔭</div>
-        <span class="brand-name">Career Trend AI</span>
+        <span class="brand-name">HieuCTA</span>
         <div class="live"><div class="live-dot"></div>LIVE</div>
       </div>
-      <div class="brand-sub">Gemini 2.0 Flash · Google Search</div>
+      <div class="brand-sub">Groq LLaMA3 · Google Search</div>
     </div>
 
     <div class="sec-label">Chế độ phân tích</div>
@@ -197,7 +197,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Be Vie
     <div class="topbar">
       <span class="topbar-mode" id="topbar-mode">🌐 Xu hướng hiện tại</span>
       <span class="search-status" id="search-status">⏳ Đang kiểm tra...</span>
-      <span class="topbar-model">Gemini 2.0 Flash</span>
+      <span class="topbar-model">Groq LLaMA3</span>
       <button class="config-btn" onclick="openConfig()">⚙ Cấu hình</button>
     </div>
 
@@ -207,7 +207,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Be Vie
         <div class="empty" id="empty-state">
           <div class="empty-glow">🔭</div>
           <h2>Phân tích xu hướng nghề nghiệp</h2>
-          <p>AI tìm kiếm thông tin thực tế từ Google, phân tích bằng Gemini 2.0 Flash. Hoàn toàn miễn phí.</p>
+          <p>AI tìm kiếm thông tin thực tế từ Google, phân tích bằng Groq LLaMA3. Hoàn toàn miễn phí.</p>
           <div class="sug-grid" id="sug-grid"></div>
         </div>
       </div>
@@ -230,7 +230,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Be Vie
     <h3>⚙ Cấu hình API Keys</h3>
     <p>Nhập API keys để sử dụng. Keys được lưu tại server qua Environment Variables trên Render.com — không lưu trong browser.</p>
     <div class="field">
-      <label>Gemini API Key <span style="color:var(--red)">*</span> <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--green);font-size:11px">(Lấy miễn phí)</a></label>
+      <label>GROQ API Key <span style="color:var(--red)">*</span> <a href="https://console.groq.com/keys" target="_blank" style="color:var(--green);font-size:11px">(Lấy miễn phí)</a></label>
       <input type="password" id="cfg-gemini" placeholder="AIzaSy..." />
     </div>
     <div class="field">
@@ -255,11 +255,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Be Vie
 const MODES = [
   {
     id:'realtime', icon:'🌐', title:'Xu hướng hiện tại', desc:'Web search thời gian thực',
-    quick:['Top ngành hot 2025','AI Engineer Việt Nam','Remote jobs phổ biến','Lương Data Scientist'],
+    quick:['Top ngành hot hiện nay','AI Engineer Việt Nam','Remote jobs phổ biến','Lương Data Scientist'],
     sugs:[
-      {ico:'📊',txt:'Ngành nào đang tuyển dụng nhiều nhất năm 2025?'},
+      {ico:'📊',txt:'Ngành nào đang tuyển dụng nhiều nhất bây giờ?'},
       {ico:'💰',txt:'Mức lương ngành AI & Machine Learning hiện nay?'},
-      {ico:'🌏',txt:'Xu hướng Remote Work tại Việt Nam 2025?'},
+      {ico:'🌏',txt:'Xu hướng Remote Work tại Việt Nam hiện nay?'},
       {ico:'🔥',txt:'Top 5 kỹ năng hot nhất thị trường lao động?'},
     ],
     system:`Bạn là chuyên gia phân tích thị trường lao động Việt Nam và toàn cầu.
@@ -274,7 +274,7 @@ Trả lời bằng tiếng Việt, súc tích nhưng đầy đủ thông tin.`
   },
   {
     id:'history', icon:'📈', title:'Phân tích lịch sử', desc:'Xu hướng qua các giai đoạn',
-    quick:['IT Việt Nam 2018-2025','Ngành chết vì COVID','Fintech tăng trưởng','E-commerce bùng nổ'],
+    quick:['IT Việt Nam 2018-2026','Ngành chết vì COVID','Fintech tăng trưởng','E-commerce bùng nổ'],
     sugs:[
       {ico:'📅',txt:'Thị trường IT Việt Nam thay đổi ra sao 5 năm qua?'},
       {ico:'💥',txt:'COVID-19 đã tác động thế nào đến thị trường lao động?'},
@@ -282,7 +282,7 @@ Trả lời bằng tiếng Việt, súc tích nhưng đầy đủ thông tin.`
       {ico:'📦',txt:'Logistics & E-commerce đã bùng nổ như thế nào?'},
     ],
     system:`Bạn là nhà phân tích lịch sử thị trường lao động với dữ liệu toàn diện.
-Phân tích theo timeline rõ ràng: trước COVID (2018-2019) → COVID (2020-2021) → hậu COVID (2022-2023) → hiện tại (2024-2025).
+Phân tích theo timeline rõ ràng: trước COVID (2018-2019) → COVID (2020-2021) → hậu COVID (2022-2023) → hiện tại (2024-2026).
 Dựa trên kết quả tìm kiếm được cung cấp, hãy:
 - Trích dẫn số liệu tăng trưởng/sụt giảm cụ thể theo từng năm
 - So sánh Việt Nam với khu vực Đông Nam Á
@@ -291,7 +291,7 @@ Dựa trên kết quả tìm kiếm được cung cấp, hãy:
 Trả lời bằng tiếng Việt, có cấu trúc rõ ràng.`
   },
   {
-    id:'predict', icon:'🔮', title:'Dự đoán tương lai', desc:'Xu hướng 2025-2035',
+    id:'predict', icon:'🔮', title:'Dự đoán tương lai', desc:'Xu hướng 2026-2035',
     quick:['Top 10 ngành 2030','AI thay thế nghề gì?','Kỹ năng cần học ngay','Việt Nam 2030'],
     sugs:[
       {ico:'🤖',txt:'AI sẽ thay thế những nghề nghiệp nào trong 5 năm tới?'},
