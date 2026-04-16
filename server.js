@@ -7,20 +7,23 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// ─────────────────────────────────────────────
-// BƯỚC 1: Google Custom Search — tìm web thật
-// ─────────────────────────────────────────────
-async function searchWeb(query, numResults = 6) {
-  const apiKey = process.env.GOOGLE_SEARCH_API_KEY;
-  const cx    = process.env.GOOGLE_SEARCH_CX;
-
-  if (!apiKey || !cx) return [];
+// ─────────────────────────────────────────────────────
+// GOOGLE CUSTOM SEARCH — tìm web thời gian thực
+// ─────────────────────────────────────────────────────
+async function searchWeb(query, num = 6) {
+  const key = process.env.GOOGLE_SEARCH_API_KEY;
+  const cx  = process.env.GOOGLE_SEARCH_CX;
+  if (!key || !cx) return [];
 
   try {
-    const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(query)}&num=${numResults}&lr=lang_vi&gl=vn&dateRestrict=m6`;
+    const year = new Date().getFullYear();
+    const url  = `https://www.googleapis.com/customsearch/v1`
+      + `?key=${key}&cx=${cx}`
+      + `&q=${encodeURIComponent(query + " " + year)}`
+      + `&num=${num}&gl=vn&lr=lang_vi&dateRestrict=m9`;
+
     const res  = await fetch(url);
     const data = await res.json();
-
     if (!data.items) return [];
 
     return data.items.map(item => ({
@@ -29,154 +32,156 @@ async function searchWeb(query, numResults = 6) {
       snippet: item.snippet,
       source:  item.displayLink,
     }));
-  } catch (err) {
-    console.error("Search error:", err.message);
+  } catch (e) {
+    console.error("[Search]", e.message);
     return [];
   }
 }
 
-// ─────────────────────────────────────────────
-// BƯỚC 2: Gemini — phân tích kết quả tìm kiếm
-// ─────────────────────────────────────────────
-async function analyzeWithGemini(systemPrompt, userQuery, searchResults, conversationHistory) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error("GEMINI_API_KEY chưa được cấu hình trong Environment Variables");
+// ─────────────────────────────────────────────────────
+// GROQ — llama-3.3-70b-versatile (model xịn nhất, free)
+// ─────────────────────────────────────────────────────
+async function askGroq(systemPrompt, userQuery, searchResults, history) {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) throw new Error("Chưa cấu hình GROQ_API_KEY trong Environment Variables");
 
-  // Ghép kết quả tìm kiếm vào context
-  let searchContext = "";
-  if (searchResults.length > 0) {
-    searchContext = `\n\n=== KẾT QUẢ TÌM KIẾM THỜI GIAN THỰC (${new Date().toLocaleDateString("vi-VN")}) ===\n`;
-    searchResults.forEach((r, i) => {
-      searchContext += `\n[${i + 1}] ${r.title}\nNguồn: ${r.source} | URL: ${r.link}\nNội dung: ${r.snippet}\n`;
-    });
-    searchContext += `\n=== HẾT KẾT QUẢ TÌM KIẾM ===\n`;
-    searchContext += `\nHãy phân tích dựa trên các kết quả tìm kiếm thực tế trên và trích dẫn nguồn cụ thể.\n`;
-  } else {
-    searchContext = `\n\n[Lưu ý: Không có kết quả tìm kiếm web. Hãy sử dụng kiến thức có sẵn và ghi rõ điều đó.]\n`;
-  }
-
-  // Build conversation history cho Gemini
-  const contents = [];
-
-  // Thêm lịch sử trò chuyện
-  for (const msg of conversationHistory) {
-    contents.push({
-      role: msg.role === "assistant" ? "model" : "user",
-      parts: [{ text: msg.content }],
-    });
-  }
-
-  // Thêm message hiện tại với search context
-  contents.push({
-    role: "user",
-    parts: [{ text: userQuery + searchContext }],
+  // Ghép kết quả web vào context
+  const now = new Date().toLocaleDateString("vi-VN", {
+    year: "numeric", month: "long", day: "numeric"
   });
 
+  let webCtx = "";
+  if (searchResults.length > 0) {
+    webCtx = `\n\n--- KẾT QUẢ TÌM KIẾM THỰC TẾ (${now}) ---\n`;
+    searchResults.forEach((r, i) => {
+      webCtx += `[${i + 1}] ${r.title}\n`;
+      webCtx += `Nguồn: ${r.source} | ${r.link}\n`;
+      webCtx += `Nội dung: ${r.snippet}\n\n`;
+    });
+    webCtx += `--- HẾT KẾT QUẢ TÌM KIẾM ---\n`;
+    webCtx += `\nHãy phân tích DỰA TRÊN các kết quả trên, trích dẫn nguồn cụ thể.\n`;
+  } else {
+    webCtx = `\n\n[Không có kết quả web. Dùng kiến thức có sẵn, ghi rõ "theo kiến thức đào tạo".]\n`;
+  }
+
+  // Build messages (giữ tối đa 6 lượt chat để tránh quá token)
+  const chatHistory = history.slice(-6).map(m => ({
+    role:    m.role === "assistant" ? "assistant" : "user",
+    content: m.content,
+  }));
+
+  const messages = [
+    ...chatHistory,
+    { role: "user", content: userQuery + webCtx },
+  ];
+
   const body = {
-    system_instruction: { parts: [{ text: systemPrompt }] },
-    contents,
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 4096,
-      topP: 0.95,
-    },
+    model:       "llama-3.3-70b-versatile",   // model mạnh nhất Groq, free
+    max_tokens:  4096,
+    temperature: 0.7,
+    messages: [
+      { role: "system", content: systemPrompt },
+      ...messages,
+    ],
   };
 
-  // Dùng gemini-2.0-flash — model mạnh nhất, miễn phí
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-  const res  = await fetch(url, {
+  const res  = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method:  "POST",
-    headers: { "Content-Type": "application/json" },
-    body:    JSON.stringify(body),
+    headers: {
+      "Content-Type":  "application/json",
+      "Authorization": `Bearer ${key}`,
+    },
+    body: JSON.stringify(body),
   });
 
   const data = await res.json();
+  if (!res.ok) throw new Error(data.error?.message || "Lỗi Groq API");
 
-  if (!res.ok) {
-    const msg = data.error?.message || "Lỗi Gemini API";
-    throw new Error(msg);
-  }
-
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error("Gemini không trả về kết quả");
+  const text = data.choices?.[0]?.message?.content;
+  if (!text) throw new Error("Groq không trả về kết quả");
   return text;
 }
 
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// QUERY BUILDER — tạo nhiều query tìm kiếm đa dạng
+// ─────────────────────────────────────────────────────
+function buildQueries(query, mode) {
+  const yr = new Date().getFullYear();
+  const q  = query;
+  const map = {
+    realtime: [
+      `${q} thị trường lao động Việt Nam ${yr}`,
+      `${q} trending jobs salary ${yr}`,
+    ],
+    history: [
+      `${q} lịch sử phát triển 2020 2021 2022 2023 2024 2025`,
+      `${q} Vietnam labor market history growth`,
+    ],
+    predict: [
+      `${q} xu hướng tương lai dự báo 2026 2030`,
+      `${q} future of work forecast report ${yr}`,
+    ],
+    verify: [
+      `${q} nghiên cứu số liệu thực tế bằng chứng`,
+      `${q} research study data statistics evidence`,
+    ],
+  };
+  return map[mode] || [`${q} ${yr}`, `${q} Vietnam`];
+}
+
+// ─────────────────────────────────────────────────────
 // API ENDPOINT
-// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
 app.post("/api/analyze", async (req, res) => {
   const { query, system, history = [], mode } = req.body;
-
-  if (!query) return res.status(400).json({ error: "Thiếu query" });
+  if (!query?.trim()) return res.status(400).json({ error: "Thiếu query" });
 
   try {
-    // 1. Tạo search query tối ưu dựa theo chế độ
-    const searchQueries = buildSearchQueries(query, mode);
+    // 1. Tìm kiếm song song
+    const queries  = buildQueries(query, mode);
+    const results  = await Promise.all(queries.map(q => searchWeb(q, 5)));
+    const flat     = results.flat();
 
-    // 2. Chạy song song các tìm kiếm
-    const searchPromises = searchQueries.map(q => searchWeb(q, 5));
-    const searchArrays   = await Promise.all(searchPromises);
-    const searchResults  = searchArrays.flat().slice(0, 12); // max 12 kết quả
+    // Dedup theo link
+    const seen     = new Set();
+    const sources  = flat.filter(r => {
+      if (seen.has(r.link)) return false;
+      seen.add(r.link);
+      return true;
+    }).slice(0, 10);
 
-    // 3. Phân tích với Gemini
-    const answer = await analyzeWithGemini(system, query, searchResults, history);
+    // 2. Gọi Groq
+    const answer = await askGroq(system, query, sources, history);
 
     res.json({
       answer,
-      sources: searchResults.map(r => ({ title: r.title, link: r.link, source: r.source })),
-      searchCount: searchResults.length,
+      sources: sources.map(s => ({ title: s.title, link: s.link, source: s.source })),
+      model:   "llama-3.3-70b-versatile",
+      searchCount: sources.length,
     });
   } catch (err) {
-    console.error("Analyze error:", err.message);
+    console.error("[Analyze]", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
-// Xây dựng nhiều query tìm kiếm để có kết quả đa dạng hơn
-function buildSearchQueries(userQuery, mode) {
-  const year = new Date().getFullYear();
-  const base = userQuery;
-
-  const byMode = {
-    realtime: [
-      `${base} ${year} thị trường lao động Việt Nam`,
-      `${base} trending jobs ${year}`,
-    ],
-    history: [
-      `${base} lịch sử phát triển 2020 2021 2022 2023 2024`,
-      `${base} market trend history Vietnam`,
-    ],
-    predict: [
-      `${base} dự đoán xu hướng tương lai 2025 2030`,
-      `${base} future jobs forecast ${year}`,
-    ],
-    verify: [
-      `${base} fact check thực tế số liệu`,
-      `${base} research study data evidence`,
-    ],
-  };
-
-  return byMode[mode] || [`${base} ${year}`, `${base} Vietnam`];
-}
-
 // Health check
-app.get("/api/health", (req, res) => {
+app.get("/api/health", (_req, res) => {
   res.json({
-    status:    "ok",
-    gemini:    !!process.env.GEMINI_API_KEY,
-    search:    !!(process.env.GOOGLE_SEARCH_API_KEY && process.env.GOOGLE_SEARCH_CX),
-    timestamp: new Date().toISOString(),
+    ok:     true,
+    groq:   !!process.env.GROQ_API_KEY,
+    search: !!(process.env.GOOGLE_SEARCH_API_KEY && process.env.GOOGLE_SEARCH_CX),
+    year:   new Date().getFullYear(),
   });
 });
 
-app.get("*", (req, res) => {
+app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Career Trend AI (Free Stack) đang chạy tại http://localhost:${PORT}`);
-  console.log(`   Gemini API:    ${process.env.GEMINI_API_KEY    ? "✅ Đã cấu hình" : "❌ Chưa có"}`);
-  console.log(`   Google Search: ${process.env.GOOGLE_SEARCH_API_KEY ? "✅ Đã cấu hình" : "❌ Chưa có (vẫn hoạt động, không có web search)"}`);
+  console.log(`\n🚀 Career Trend AI running → http://localhost:${PORT}`);
+  console.log(`   Groq API  : ${process.env.GROQ_API_KEY           ? "✅ OK" : "❌ Missing GROQ_API_KEY"}`);
+  console.log(`   Web Search: ${process.env.GOOGLE_SEARCH_API_KEY  ? "✅ OK" : "❌ Missing (optional)"}\n`);
 });

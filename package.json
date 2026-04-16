@@ -1,7 +1,7 @@
 {
-  "name": "career-ai-free",
-  "version": "1.0.0",
-  "description": "AI phân tích xu hướng nghề nghiệp — Gemini 2.0 Flash + Google Search (100% miễn phí)",
+  "name": "career-ai-groq",
+  "version": "2.0.0",
+  "description": "AI phân tích xu hướng nghề nghiệp — Groq llama-3.3-70b + Google Search (100% miễn phí)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
