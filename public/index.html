@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Trend AI — Phân tích xu hướng nghề nghiệp</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e28;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#e8eaf0;--text2:#8b90a0;--text3:#4a5068;
+  --green:#1D9E75;--green2:#0F6E56;--gdim:rgba(29,158,117,0.14);
+  --purple:#7F77DD;--pdim:rgba(127,119,221,0.14);
+  --coral:#D85A30;--cdim:rgba(216,90,48,0.14);
+  --amber:#EF9F27;--adim:rgba(239,159,39,0.14);
+  --red:#e24b4a;--rdim:rgba(226,75,74,0.13);
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.6}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:256px 1fr;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.brand{padding:20px 18px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.brand-row{display:flex;align-items:center;gap:10px;margin-bottom:3px}
+.brand-ico{width:34px;height:34px;background:var(--gdim);border:1px solid rgba(29,158,117,.28);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.brand-name{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.3px}
+.live{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:10px;color:var(--green);font-weight:700;letter-spacing:.6px}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.brand-sub{font-size:11px;color:var(--text3);margin-left:44px}
+
+.sec-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);font-weight:700;padding:14px 18px 7px;flex-shrink:0}
+.mode-list{padding:0 10px;display:flex;flex-direction:column;gap:2px;flex-shrink:0}
+.mode-btn{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--text2);cursor:pointer;text-align:left;font-family:'Be Vietnam Pro',sans-serif;font-size:12.5px;transition:all .16s;width:100%}
+.mode-btn:hover{background:var(--bg3);color:var(--text)}
+.mode-btn.active{background:var(--gdim);color:var(--text);border-color:rgba(29,158,117,.22)}
+.mode-ico{font-size:15px;flex-shrink:0;margin-top:1px}
+.mode-title{font-weight:500;font-size:12.5px}
+.mode-desc{font-size:10.5px;color:var(--text3);margin-top:1px;line-height:1.4}
+.mode-btn.active .mode-desc{color:rgba(29,158,117,.6)}
+
+.hist-section{flex:1;overflow:hidden;display:flex;flex-direction:column;border-top:1px solid var(--border);margin-top:10px}
+.hist-list{overflow-y:auto;padding:0 10px 10px;flex:1;display:flex;flex-direction:column;gap:2px}
+.hist-list::-webkit-scrollbar{width:3px}
+.hist-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.hist-item{padding:7px 10px;border-radius:7px;font-size:11.5px;color:var(--text2);cursor:pointer;transition:all .14s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid transparent}
+.hist-item:hover{background:var(--bg3);color:var(--text);border-color:var(--border)}
+.new-btn{margin:0 10px 14px;padding:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text2);font-size:12px;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:all .15s;flex-shrink:0}
+.new-btn:hover{background:var(--border2);color:var(--text)}
+
+/* MAIN */
+.main{display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.topbar{padding:13px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--bg2);flex-shrink:0}
+.topbar-mode{font-size:12.5px;font-weight:500;color:var(--green);padding:4px 11px;background:var(--gdim);border:1px solid rgba(29,158,117,.22);border-radius:20px}
+.topbar-model{margin-left:auto;font-size:11.5px;color:var(--text3)}
+.search-status{font-size:11px;padding:3px 9px;border-radius:12px;background:var(--bg3);border:1px solid var(--border);color:var(--text3)}
+.search-status.on{color:var(--green);border-color:rgba(29,158,117,.25);background:var(--gdim)}
+
+/* CHAT */
+.chat-wrap{flex:1;overflow-y:auto;padding:24px 28px;scroll-behavior:smooth}
+.chat-wrap::-webkit-scrollbar{width:4px}
+.chat-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+.msg{display:flex;gap:12px;margin-bottom:22px;animation:msgIn .28s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.msg.user{flex-direction:row-reverse}
+.ava{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0;margin-top:2px}
+.ava.ai{background:var(--gdim);border:1px solid rgba(29,158,117,.28);color:var(--green)}
+.ava.user{background:var(--pdim);border:1px solid rgba(127,119,221,.28);color:var(--purple)}
+.bubble{max-width:78%;padding:13px 17px;border-radius:15px;font-size:13.5px;line-height:1.75;border:1px solid var(--border)}
+.msg.user .bubble{background:var(--pdim);border-color:rgba(127,119,221,.22);border-radius:15px 4px 15px 15px;color:#cbc8f6}
+.msg.ai .bubble{background:var(--bg2);border-radius:4px 15px 15px 15px}
+
+/* Bubble markdown */
+.bubble h3{font-size:13.5px;font-weight:600;margin:13px 0 6px;color:var(--text)}
+.bubble h3:first-child{margin-top:0}
+.bubble ul,.bubble ol{padding-left:18px;margin:5px 0}
+.bubble li{margin:4px 0;color:var(--text2)}
+.bubble li strong{color:var(--text)}
+.bubble p{margin:5px 0;color:var(--text2)}
+.bubble p:first-child{margin-top:0}
+.bubble strong{color:var(--text);font-weight:600}
+.bubble em{color:var(--text2);font-style:italic}
+.bubble hr{border:none;border-top:1px solid var(--border);margin:11px 0}
+.bubble code{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12px;font-family:monospace;color:var(--amber)}
+.bubble blockquote{border-left:3px solid var(--green);padding:6px 12px;background:var(--gdim);border-radius:0 7px 7px 0;margin:8px 0;color:var(--text2);font-size:13px}
+
+/* Source panel */
+.sources{margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
+.sources-title{font-size:11px;color:var(--text3);margin-bottom:6px;font-weight:500}
+.source-list{display:flex;flex-direction:column;gap:4px}
+.source-item{display:flex;align-items:flex-start;gap:6px;font-size:11.5px;padding:5px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text2);transition:all .14s}
+.source-item:hover{border-color:var(--border2);color:var(--text);background:var(--bg2)}
+.source-num{font-size:10px;color:var(--text3);flex-shrink:0;margin-top:1px;font-weight:600}
+.source-info{flex:1;min-width:0}
+.source-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.5px;color:var(--text2);font-weight:500}
+.source-domain{font-size:10px;color:var(--text3)}
+.search-badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;padding:3px 8px;border-radius:10px;background:var(--gdim);border:1px solid rgba(29,158,117,.2);color:var(--green);margin-top:8px}
+
+/* Loading */
+.loading-wrap{display:flex;gap:12px;margin-bottom:22px}
+.loading-bubble{background:var(--bg2);border:1px solid var(--border);border-radius:4px 15px 15px 15px;padding:13px 17px;max-width:78%}
+.loading-step{font-size:11.5px;color:var(--text3);margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.spin{width:9px;height:9px;border:1.5px solid var(--green);border-top-color:transparent;border-radius:50%;display:inline-block;animation:spin .75s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dots{display:flex;gap:5px}
+.dots span{width:7px;height:7px;border-radius:50%;background:rgba(29,158,117,.18);border:1px solid rgba(29,158,117,.25);animation:bounce 1.15s ease-in-out infinite}
+.dots span:nth-child(2){animation-delay:.17s;background:rgba(29,158,117,.28)}
+.dots span:nth-child(3){animation-delay:.34s;background:rgba(29,158,117,.18)}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* EMPTY */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;text-align:center;min-height:50vh}
+.empty-glow{width:72px;height:72px;background:var(--gdim);border:1px solid rgba(29,158,117,.2);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:18px}
+.empty h2{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;margin-bottom:7px;letter-spacing:-.3px}
+.empty p{font-size:13px;color:var(--text3);max-width:340px;line-height:1.6}
+.sug-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:22px;max-width:460px;width:100%}
+.sug-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;cursor:pointer;text-align:left;font-family:'Be Vietnam Pro',sans-serif;color:var(--text2);font-size:12px;line-height:1.5;transition:all .17s}
+.sug-card:hover{background:var(--bg3);border-color:var(--border2);color:var(--text)}
+.sug-ico{font-size:17px;margin-bottom:5px;display:block}
+
+/* ERROR BANNER */
+.err-banner{background:var(--rdim);border:1px solid rgba(226,75,74,.25);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);margin-bottom:16px;display:none}
+.err-banner.show{display:block}
+
+/* INPUT */
+.input-area{border-top:1px solid var(--border);padding:14px 26px 18px;background:var(--bg2);flex-shrink:0}
+.quick-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{font-size:11.5px;padding:4px 11px;border-radius:18px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .14s;white-space:nowrap}
+.chip:hover{border-color:rgba(29,158,117,.35);color:var(--green);background:var(--gdim)}
+.input-box{display:flex;gap:9px;align-items:flex-end}
+.ta{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:11px;padding:11px 15px;color:var(--text);font-size:13.5px;font-family:'Be Vietnam Pro',sans-serif;resize:none;outline:none;min-height:46px;max-height:130px;line-height:1.55;transition:border-color .17s}
+.ta:focus{border-color:rgba(29,158,117,.45)}
+.ta::placeholder{color:var(--text3)}
+.send{width:46px;height:46px;background:var(--green);border:none;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .17s;font-size:17px;color:#fff}
+.send:hover{background:var(--green2);transform:scale(1.04)}
+.send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.hint{font-size:10.5px;color:var(--text3);margin-top:7px;text-align:center}
+
+/* Config modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:100;display:none}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:24px;width:100%;max-width:460px;margin:16px}
+.modal h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px}
+.modal p{font-size:12.5px;color:var(--text2);margin-bottom:18px;line-height:1.6}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;color:var(--text2);font-weight:500;margin-bottom:5px}
+.field input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'Be Vietnam Pro',sans-serif;outline:none;transition:border-color .15s}
+.field input:focus{border-color:rgba(29,158,117,.4)}
+.field input::placeholder{color:var(--text3)}
+.modal-btns{display:flex;gap:8px;margin-top:4px}
+.btn-save{flex:1;padding:9px;background:var(--green);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:500;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:background .15s}
+.btn-save:hover{background:var(--green2)}
+.btn-cancel{padding:9px 18px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text2);font-size:13px;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:all .15s}
+.btn-cancel:hover{color:var(--text)}
+.config-btn{margin-left:8px;padding:4px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text3);font-size:11.5px;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:all .14s}
+.config-btn:hover{color:var(--text);border-color:var(--border2)}
+
+@media(max-width:720px){.layout{grid-template-columns:1fr}.sidebar{display:none}.chat-wrap{padding:14px}.input-area{padding:11px 14px 15px}.topbar{padding:11px 14px}.bubble{max-width:92%}}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-row">
+        <div class="brand-ico">🔭</div>
+        <span class="brand-name">Career Trend AI</span>
+        <div class="live"><div class="live-dot"></div>LIVE</div>
+      </div>
+      <div class="brand-sub">Gemini 2.0 Flash · Google Search</div>
+    </div>
+
+    <div class="sec-label">Chế độ phân tích</div>
+    <div class="mode-list" id="mode-list"></div>
+
+    <div class="hist-section">
+      <div class="sec-label">Lịch sử</div>
+      <div class="hist-list" id="hist-list">
+        <div style="font-size:11.5px;color:var(--text3);text-align:center;padding:18px 0">Chưa có lịch sử</div>
+      </div>
+    </div>
+    <button class="new-btn" onclick="newChat()">+ Phân tích mới</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <span class="topbar-mode" id="topbar-mode">🌐 Xu hướng hiện tại</span>
+      <span class="search-status" id="search-status">⏳ Đang kiểm tra...</span>
+      <span class="topbar-model">Gemini 2.0 Flash</span>
+      <button class="config-btn" onclick="openConfig()">⚙ Cấu hình</button>
+    </div>
+
+    <div class="chat-wrap" id="chat-wrap">
+      <div class="err-banner" id="err-banner"></div>
+      <div id="chat-area">
+        <div class="empty" id="empty-state">
+          <div class="empty-glow">🔭</div>
+          <h2>Phân tích xu hướng nghề nghiệp</h2>
+          <p>AI tìm kiếm thông tin thực tế từ Google, phân tích bằng Gemini 2.0 Flash. Hoàn toàn miễn phí.</p>
+          <div class="sug-grid" id="sug-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="quick-row" id="quick-row"></div>
+      <div class="input-box">
+        <textarea class="ta" id="ta" rows="1" placeholder="Nhập câu hỏi về xu hướng nghề nghiệp..."></textarea>
+        <button class="send" id="send-btn" onclick="send()" title="Gửi">➤</button>
+      </div>
+      <div class="hint">Enter gửi · Shift+Enter xuống dòng</div>
+    </div>
+  </main>
+</div>
+
+<!-- CONFIG MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>⚙ Cấu hình API Keys</h3>
+    <p>Nhập API keys để sử dụng. Keys được lưu tại server qua Environment Variables trên Render.com — không lưu trong browser.</p>
+    <div class="field">
+      <label>Gemini API Key <span style="color:var(--red)">*</span> <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--green);font-size:11px">(Lấy miễn phí)</a></label>
+      <input type="password" id="cfg-gemini" placeholder="AIzaSy..." />
+    </div>
+    <div class="field">
+      <label>Google Search API Key <span style="color:var(--text3)">(tùy chọn — để tìm web thật)</span> <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="color:var(--green);font-size:11px">(Lấy miễn phí)</a></label>
+      <input type="password" id="cfg-gsearch" placeholder="AIzaSy..." />
+    </div>
+    <div class="field">
+      <label>Google Search Engine ID (CX) <span style="color:var(--text3)">(tùy chọn)</span> <a href="https://programmablesearchengine.google.com" target="_blank" style="color:var(--green);font-size:11px">(Tạo miễn phí)</a></label>
+      <input type="text" id="cfg-cx" placeholder="017576662512468239146:omuauf..." />
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeConfig()">Đóng</button>
+      <button class="btn-save" onclick="saveConfig()">Lưu & Áp dụng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// MODES
+// ─────────────────────────────────────────────
+const MODES = [
+  {
+    id:'realtime', icon:'🌐', title:'Xu hướng hiện tại', desc:'Web search thời gian thực',
+    quick:['Top ngành hot 2025','AI Engineer Việt Nam','Remote jobs phổ biến','Lương Data Scientist'],
+    sugs:[
+      {ico:'📊',txt:'Ngành nào đang tuyển dụng nhiều nhất năm 2025?'},
+      {ico:'💰',txt:'Mức lương ngành AI & Machine Learning hiện nay?'},
+      {ico:'🌏',txt:'Xu hướng Remote Work tại Việt Nam 2025?'},
+      {ico:'🔥',txt:'Top 5 kỹ năng hot nhất thị trường lao động?'},
+    ],
+    system:`Bạn là chuyên gia phân tích thị trường lao động Việt Nam và toàn cầu.
+Nhiệm vụ: Phân tích xu hướng nghề nghiệp HIỆN TẠI dựa trên kết quả tìm kiếm web được cung cấp.
+Yêu cầu:
+- Trích dẫn số liệu cụ thể từ nguồn tìm kiếm (tên nguồn, số liệu)
+- Đánh giá mức độ đáng tin cậy của thông tin
+- Nhận định cụ thể về cơ hội tại Việt Nam
+- Dùng emoji và định dạng rõ ràng (## heading, bullet points)
+- Tránh nói chung chung, phải cụ thể và có số liệu
+Trả lời bằng tiếng Việt, súc tích nhưng đầy đủ thông tin.`
+  },
+  {
+    id:'history', icon:'📈', title:'Phân tích lịch sử', desc:'Xu hướng qua các giai đoạn',
+    quick:['IT Việt Nam 2018-2025','Ngành chết vì COVID','Fintech tăng trưởng','E-commerce bùng nổ'],
+    sugs:[
+      {ico:'📅',txt:'Thị trường IT Việt Nam thay đổi ra sao 5 năm qua?'},
+      {ico:'💥',txt:'COVID-19 đã tác động thế nào đến thị trường lao động?'},
+      {ico:'🏦',txt:'Sự trỗi dậy của Fintech & Banking số ở Việt Nam?'},
+      {ico:'📦',txt:'Logistics & E-commerce đã bùng nổ như thế nào?'},
+    ],
+    system:`Bạn là nhà phân tích lịch sử thị trường lao động với dữ liệu toàn diện.
+Phân tích theo timeline rõ ràng: trước COVID (2018-2019) → COVID (2020-2021) → hậu COVID (2022-2023) → hiện tại (2024-2025).
+Dựa trên kết quả tìm kiếm được cung cấp, hãy:
+- Trích dẫn số liệu tăng trưởng/sụt giảm cụ thể theo từng năm
+- So sánh Việt Nam với khu vực Đông Nam Á
+- Rút ra bài học và pattern từ lịch sử
+- Dùng ## heading cho từng giai đoạn, bullet points cho số liệu
+Trả lời bằng tiếng Việt, có cấu trúc rõ ràng.`
+  },
+  {
+    id:'predict', icon:'🔮', title:'Dự đoán tương lai', desc:'Xu hướng 2025-2035',
+    quick:['Top 10 ngành 2030','AI thay thế nghề gì?','Kỹ năng cần học ngay','Việt Nam 2030'],
+    sugs:[
+      {ico:'🤖',txt:'AI sẽ thay thế những nghề nghiệp nào trong 5 năm tới?'},
+      {ico:'🎯',txt:'Kỹ năng gì cần học ngay để không bị tụt hậu?'},
+      {ico:'🌱',txt:'Green Economy & Climate Tech sẽ tạo ra nghề gì mới?'},
+      {ico:'🚀',txt:'Top 10 ngành nghề tiềm năng nhất đến năm 2030?'},
+    ],
+    system:`Bạn là chuyên gia dự báo xu hướng nghề nghiệp dựa trên dữ liệu thực tế.
+Dựa trên kết quả tìm kiếm về báo cáo WEF Future of Jobs, McKinsey, OECD và dữ liệu thị trường:
+- Đưa ra dự báo có căn cứ từ các nguồn tìm kiếm được
+- Ghi rõ mức độ tin cậy: (🟢 Cao / 🟡 Trung bình / 🔴 Thấp)
+- Phân tích kịch bản lạc quan và thách thức
+- Lời khuyên cụ thể cho: sinh viên, người đi làm, doanh nghiệp
+- DISCLAIMER rõ ràng đây là dự báo dựa trên dữ liệu, không phải sự thật tuyệt đối
+Trả lời bằng tiếng Việt.`
+  },
+  {
+    id:'verify', icon:'🔍', title:'Kiểm chứng thông tin', desc:'Fact-check tin tức nghề nghiệp',
+    quick:['IT chết vì AI?','Lương AI 500tr thật?','Blockchain còn tương lai?','Data Science bão hòa?'],
+    sugs:[
+      {ico:'❓',txt:'Có đúng là AI sẽ xóa sổ 50% việc làm trong 10 năm?'},
+      {ico:'💸',txt:'Lương AI Engineer tại Việt Nam có thực sự lên đến 500tr?'},
+      {ico:'⛓️',txt:'Blockchain và Web3 có thực sự thất bại hay đang phát triển?'},
+      {ico:'📉',txt:'Data Science đã bão hòa hay vẫn còn nhiều cơ hội?'},
+    ],
+    system:`Bạn là chuyên gia fact-checking thông tin thị trường lao động với tư duy phê phán.
+Dựa trên kết quả tìm kiếm thực tế được cung cấp, hãy đánh giá:
+✅ ĐÚNG — Bằng chứng mạnh từ nhiều nguồn
+⚠️ MỘT PHẦN ĐÚNG — Đúng trong một số context
+❌ SAI / PHÓNG ĐẠI — Thiếu bằng chứng hoặc bị méo mó
+🔄 CHƯA RÕ — Cần thêm dữ liệu
+
+Format: Verdict → Bằng chứng ủng hộ → Bằng chứng phản biện → Kết luận thực tế.
+Trích dẫn cụ thể từ các nguồn tìm kiếm. Trả lời bằng tiếng Việt.`
+  },
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let mode = MODES[0];
+let msgs = [];
+let loading = false;
+let hist = [];
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+function init() {
+  renderModes();
+  renderSugs();
+  renderChips();
+  setupTA();
+  checkHealth();
+}
+
+async function checkHealth() {
+  try {
+    const r = await fetch('/api/health');
+    const d = await r.json();
+    const el = document.getElementById('search-status');
+    if (d.search) {
+      el.textContent = '🌐 Web Search: BẬT';
+      el.className = 'search-status on';
+    } else {
+      el.textContent = '📚 Web Search: TẮT';
+      el.className = 'search-status';
+    }
+  } catch(e) {
+    document.getElementById('search-status').textContent = '⚠ Offline';
+  }
+}
+
+function renderModes() {
+  document.getElementById('mode-list').innerHTML = MODES.map(m => `
+    <button class="mode-btn ${m.id===mode.id?'active':''}" onclick="setMode('${m.id}')">
+      <span class="mode-ico">${m.icon}</span>
+      <div><div class="mode-title">${m.title}</div><div class="mode-desc">${m.desc}</div></div>
+    </button>`).join('');
+}
+
+function renderSugs() {
+  const g = document.getElementById('sug-grid');
+  if (!g) return;
+  g.innerHTML = mode.sugs.map(s =>
+    `<button class="sug-card" onclick="useSug(${JSON.stringify(s.txt)})"><span class="sug-ico">${s.ico}</span>${esc(s.txt)}</button>`
+  ).join('');
+}
+
+function renderChips() {
+  document.getElementById('quick-row').innerHTML = mode.quick.map(q =>
+    `<button class="chip" onclick="useSug(${JSON.stringify(q)})">${esc(q)}</button>`
+  ).join('');
+}
+
+function renderHist() {
+  const el = document.getElementById('hist-list');
+  if (!hist.length) {
+    el.innerHTML = '<div style="font-size:11.5px;color:var(--text3);text-align:center;padding:18px 0">Chưa có lịch sử</div>';
+    return;
+  }
+  el.innerHTML = hist.slice(0,25).map(h => {
+    const m = MODES.find(x=>x.id===h.mode);
+    return `<div class="hist-item">${m?m.icon:'📌'} ${esc(h.text)}</div>`;
+  }).join('');
+}
+
+function setMode(id) {
+  mode = MODES.find(m=>m.id===id);
+  renderModes();
+  renderChips();
+  document.getElementById('topbar-mode').textContent = `${mode.icon} ${mode.title}`;
+  document.getElementById('ta').placeholder = `Câu hỏi về ${mode.title.toLowerCase()}...`;
+  renderSugs();
+}
+
+function useSug(txt) {
+  const ta = document.getElementById('ta');
+  ta.value = txt;
+  resize(ta);
+  send();
+}
+
+function newChat() {
+  msgs = [];
+  const area = document.getElementById('chat-area');
+  area.innerHTML = `
+    <div class="empty" id="empty-state">
+      <div class="empty-glow">🔭</div>
+      <h2>Phân tích xu hướng nghề nghiệp</h2>
+      <p>AI tìm kiếm thông tin thực tế từ Google, phân tích bằng Gemini 2.0 Flash. Hoàn toàn miễn phí.</p>
+      <div class="sug-grid" id="sug-grid"></div>
+    </div>`;
+  renderSugs();
+  hideErr();
+}
+
+function setupTA() {
+  const ta = document.getElementById('ta');
+  ta.addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()} });
+  ta.addEventListener('input', ()=>resize(ta));
+}
+
+function resize(el) {
+  el.style.height='auto';
+  el.style.height=Math.min(el.scrollHeight,130)+'px';
+}
+
+// ─────────────────────────────────────────────
+// SEND
+// ─────────────────────────────────────────────
+async function send() {
+  if(loading) return;
+  const ta = document.getElementById('ta');
+  const query = ta.value.trim();
+  if(!query) return;
+
+  const empty = document.getElementById('empty-state');
+  if(empty) empty.remove();
+  hideErr();
+
+  ta.value=''; resize(ta);
+  loading=true;
+  document.getElementById('send-btn').disabled=true;
+
+  appendMsg('user', `<p style="margin:0">${esc(query)}</p>`);
+
+  hist.unshift({mode:mode.id, text: query.length>52 ? query.slice(0,52)+'…' : query});
+  renderHist();
+
+  const lid='ld_'+Date.now();
+  appendLoading(lid);
+
+  msgs.push({role:'user', content:query});
+
+  try {
+    const res = await fetch('/api/analyze', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({query, system:mode.system, history:msgs.slice(0,-1), mode:mode.id})
+    });
+    const d = await res.json();
+    removeEl(lid);
+
+    if(d.error) {
+      showErr(d.error);
+      msgs.pop();
+    } else {
+      msgs.push({role:'assistant', content:d.answer});
+      let html = mdToHtml(d.answer);
+
+      // Sources panel
+      if(d.sources && d.sources.length>0) {
+        html += `<div class="sources">
+          <div class="sources-title">📡 Nguồn tìm kiếm (${d.sources.length} kết quả)</div>
+          <div class="source-list">
+            ${d.sources.slice(0,5).map((s,i)=>`
+              <a class="source-item" href="${esc(s.link)}" target="_blank" rel="noopener">
+                <span class="source-num">${i+1}</span>
+                <div class="source-info">
+                  <div class="source-title">${esc(s.title)}</div>
+                  <div class="source-domain">${esc(s.source)}</div>
+                </div>
+              </a>`).join('')}
+          </div>
+          <div class="search-badge">🌐 Dữ liệu thời gian thực · Gemini 2.0 Flash</div>
+        </div>`;
+      }
+
+      appendMsg('ai', html);
+    }
+  } catch(err) {
+    removeEl(lid);
+    showErr('Lỗi kết nối server: '+err.message);
+    msgs.pop();
+  }
+
+  loading=false;
+  document.getElementById('send-btn').disabled=false;
+  document.getElementById('ta').focus();
+}
+
+// ─────────────────────────────────────────────
+// DOM HELPERS
+// ─────────────────────────────────────────────
+function appendMsg(role, html) {
+  const area = document.getElementById('chat-area');
+  const d = document.createElement('div');
+  d.className = `msg ${role}`;
+  d.innerHTML = `
+    <div class="ava ${role}">${role==='ai'?'🔭':'U'}</div>
+    <div class="bubble">${html}</div>`;
+  area.appendChild(d);
+  d.scrollIntoView({behavior:'smooth',block:'end'});
+}
+
+function appendLoading(id) {
+  const area = document.getElementById('chat-area');
+  const d = document.createElement('div');
+  d.id=id; d.className='loading-wrap';
+  d.innerHTML=`
+    <div class="ava ai">🔭</div>
+    <div class="loading-bubble">
+      <div class="loading-step"><div class="spin"></div>Đang tìm kiếm thông tin từ web...</div>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>`;
+  area.appendChild(d);
+  d.scrollIntoView({behavior:'smooth',block:'end'});
+}
+
+function removeEl(id) { const e=document.getElementById(id); if(e)e.remove(); }
+function showErr(msg) { const e=document.getElementById('err-banner'); e.textContent='⚠ '+msg; e.className='err-banner show'; }
+function hideErr() { document.getElementById('err-banner').className='err-banner'; }
+
+// ─────────────────────────────────────────────
+// MARKDOWN → HTML
+// ─────────────────────────────────────────────
+function mdToHtml(text) {
+  let h = esc(text)
+    .replace(/^#{1,3} (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>')
+    .replace(/^[-•*] (.+)$/gm, '<li>$1</li>')
+    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>[\s\S]*?<\/li>)(\n<li>|$)/g, '$1$2')
+    .replace(/(<li>.*<\/li>\n?)+/g, m=>`<ul>${m}</ul>`)
+    .replace(/^---+$/gm,'<hr>')
+    .replace(/\n{2,}/g,'</p><p>')
+    .replace(/\n/g,'<br>');
+  if(!h.startsWith('<')) h=`<p>${h}</p>`;
+  return h;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─────────────────────────────────────────────
+// CONFIG MODAL
+// ─────────────────────────────────────────────
+function openConfig() { document.getElementById('modal').className='modal-overlay open'; }
+function closeConfig() { document.getElementById('modal').className='modal-overlay'; }
+function saveConfig() {
+  closeConfig();
+  alert('Để áp dụng API keys, hãy thêm vào Environment Variables trên Render.com và redeploy.\n\nXem hướng dẫn trong file README.md');
+}
+
+// START
+init();
+</script>
+</body>
+</html>
