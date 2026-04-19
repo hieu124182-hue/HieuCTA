@@ -1,158 +1,175 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Career Trend AI 2026</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Career AI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔭</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0b0d12;--bg2:#11141c;--bg3:#181c27;--bg4:#1e2330;
-  --b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.11);--b3:rgba(255,255,255,.17);
-  --t1:#e9ecf4;--t2:#8a90a2;--t3:#454d63;
-  --g:#00c47a;--g2:#009960;--gdim:rgba(0,196,122,.12);--gbr:rgba(0,196,122,.28);
-  --p:#8b7ff5;--pdim:rgba(139,127,245,.13);--pbr:rgba(139,127,245,.28);
-  --a:#f5a623;--adim:rgba(245,166,35,.12);
-  --r:#f05252;--rdim:rgba(240,82,82,.12);
-  --c:#f07050;--cdim:rgba(240,112,80,.12);
+  --bg:#0f0f10;--bg2:#1a1a1c;--bg3:#242428;--bg4:#2e2e33;
+  --b1:rgba(255,255,255,.07);--b2:rgba(255,255,255,.12);--b3:rgba(255,255,255,.2);
+  --t1:#ececec;--t2:#a0a0a8;--t3:#555560;
+  --g:#10b981;--gdim:rgba(16,185,129,.12);--gbr:rgba(16,185,129,.3);
+  --p:#818cf8;--pdim:rgba(129,140,248,.12);--pbr:rgba(129,140,248,.3);
+  --r:#f87171;--rdim:rgba(248,113,113,.1);
+  --a:#fbbf24;
 }
-html,body{height:100%;background:var(--bg);color:var(--t1);font-family:'Be Vietnam Pro',sans-serif;font-size:15px;line-height:1.6;overflow:hidden}
+html,body{height:100%;background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;font-size:15px;overflow:hidden}
 
-/* ── LAYOUT ── */
-.app{display:grid;grid-template-columns:260px 1fr;height:100vh}
+/* LAYOUT */
+.app{display:flex;height:100vh}
 
-/* ── SIDEBAR ── */
-.side{background:var(--bg2);border-right:1px solid var(--b1);display:flex;flex-direction:column;overflow:hidden}
+/* SIDEBAR */
+.side{width:250px;background:var(--bg2);border-right:1px solid var(--b1);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
 
-.brand{padding:18px 16px 14px;border-bottom:1px solid var(--b1);flex-shrink:0}
-.brand-row{display:flex;align-items:center;gap:9px;margin-bottom:2px}
-.b-ico{width:32px;height:32px;background:var(--gdim);border:1px solid var(--gbr);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.b-name{font-family:'Space Grotesk',sans-serif;font-size:15.5px;font-weight:700;letter-spacing:-.3px;color:var(--t1)}
-.live{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:var(--g);letter-spacing:.7px;text-transform:uppercase}
-.ldot{width:5px;height:5px;background:var(--g);border-radius:50%;animation:lpulse 2s ease-in-out infinite}
-@keyframes lpulse{0%,100%{opacity:1}50%{opacity:.25}}
-.b-sub{font-size:11px;color:var(--t3);margin-left:41px}
+.logo{padding:16px 14px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-ico{width:30px;height:30px;background:var(--gdim);border:1px solid var(--gbr);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-text{font-size:14px;font-weight:600;color:var(--t1)}
+.logo-sub{font-size:10px;color:var(--t3);margin-top:1px}
 
-.slabel{font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--t3);font-weight:700;padding:13px 16px 6px;flex-shrink:0}
+.new-chat{margin:10px;padding:9px 12px;background:var(--bg3);border:1px solid var(--b2);border-radius:8px;color:var(--t2);font-size:12.5px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .15s;text-align:left;display:flex;align-items:center;gap:7px;flex-shrink:0}
+.new-chat:hover{background:var(--bg4);color:var(--t1);border-color:var(--b3)}
+.new-chat svg{width:13px;height:13px;flex-shrink:0}
 
-.mlist{padding:0 8px;display:flex;flex-direction:column;gap:1px;flex-shrink:0}
-.mbtn{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--t2);cursor:pointer;text-align:left;font-family:'Be Vietnam Pro',sans-serif;font-size:12.5px;transition:all .15s;width:100%}
-.mbtn:hover{background:var(--bg3);color:var(--t1)}
-.mbtn.on{background:var(--gdim);color:var(--t1);border-color:var(--gbr)}
-.mico{font-size:15px;flex-shrink:0;margin-top:1px}
-.mtitle{font-weight:500;line-height:1.3}
-.mdesc{font-size:10.5px;color:var(--t3);margin-top:1px;line-height:1.3}
-.mbtn.on .mdesc{color:rgba(0,196,122,.55)}
+.hist-label{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);font-weight:600;padding:8px 14px 4px;flex-shrink:0}
 
-.hist-wrap{flex:1;overflow:hidden;display:flex;flex-direction:column;border-top:1px solid var(--b1);margin-top:8px}
-.hlist{overflow-y:auto;padding:0 8px 8px;flex:1;display:flex;flex-direction:column;gap:1px}
-.hlist::-webkit-scrollbar{width:3px}
-.hlist::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
-.hitem{padding:6px 10px;border-radius:7px;font-size:11.5px;color:var(--t2);cursor:pointer;transition:all .13s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid transparent}
+.hist{flex:1;overflow-y:auto;padding:0 6px 8px}
+.hist::-webkit-scrollbar{width:3px}
+.hist::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+.hitem{padding:7px 9px;border-radius:6px;font-size:12px;color:var(--t2);cursor:pointer;transition:all .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid transparent}
 .hitem:hover{background:var(--bg3);color:var(--t1);border-color:var(--b1)}
+.hitem.active{background:var(--bg3);color:var(--t1);border-color:var(--b2)}
+.no-hist{font-size:11.5px;color:var(--t3);text-align:center;padding:20px 0}
 
-.newbtn{margin:0 8px 12px;padding:8px;background:var(--bg3);border:1px solid var(--b2);border-radius:7px;color:var(--t2);font-size:12px;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:all .14s;flex-shrink:0}
-.newbtn:hover{background:var(--b2);color:var(--t1)}
+.side-footer{padding:10px;border-top:1px solid var(--b1);flex-shrink:0}
+.status-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3);padding:6px 8px;background:var(--bg3);border-radius:6px;border:1px solid var(--b1)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--g);animation:lp 2s ease-in-out infinite;flex-shrink:0}
+@keyframes lp{0%,100%{opacity:1}50%{opacity:.2}}
+.dot-off{width:6px;height:6px;border-radius:50%;background:var(--t3);flex-shrink:0}
 
-/* ── MAIN ── */
-.main{display:flex;flex-direction:column;overflow:hidden}
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
-.tbar{padding:12px 24px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:9px;background:var(--bg2);flex-shrink:0}
-.tmode{font-size:12px;font-weight:500;color:var(--g);padding:3px 10px;background:var(--gdim);border:1px solid var(--gbr);border-radius:18px}
-.tstatus{font-size:11px;padding:3px 9px;border-radius:10px;background:var(--bg3);border:1px solid var(--b1);color:var(--t3)}
-.tstatus.on{color:var(--g);border-color:var(--gbr);background:var(--gdim)}
-.tmodel{margin-left:auto;font-size:11px;color:var(--t3);padding:3px 9px;background:var(--bg3);border:1px solid var(--b1);border-radius:10px}
+/* CHAT AREA */
+.chat{flex:1;overflow-y:auto;padding:0;scroll-behavior:smooth}
+.chat::-webkit-scrollbar{width:5px}
+.chat::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px}
+.chat::-webkit-scrollbar-track{background:transparent}
 
-/* ── CHAT ── */
-.chat{flex:1;overflow-y:auto;padding:22px 26px;scroll-behavior:smooth}
-.chat::-webkit-scrollbar{width:4px}
-.chat::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+/* MESSAGES */
+.msgs{max-width:760px;margin:0 auto;padding:24px 20px 8px;display:flex;flex-direction:column;gap:0}
 
-.msg{display:flex;gap:11px;margin-bottom:20px;animation:min .25s ease}
-@keyframes min{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.msg{display:flex;gap:12px;padding:16px 0;border-bottom:1px solid transparent}
+.msg:last-child{border-bottom:none}
 .msg.u{flex-direction:row-reverse}
-.ava{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;margin-top:2px}
-.ava.ai{background:var(--gdim);border:1px solid var(--gbr);font-size:15px}
-.ava.u{background:var(--pdim);border:1px solid var(--pbr);color:var(--p)}
+.msg.u:hover,.msg.ai:hover{background:transparent}
 
-.bub{max-width:80%;padding:12px 16px;border-radius:14px;font-size:13.5px;line-height:1.75;border:1px solid var(--b1)}
-.msg.u .bub{background:var(--pdim);border-color:var(--pbr);border-radius:14px 3px 14px 14px;color:#cac6f8}
-.msg.ai .bub{background:var(--bg2);border-radius:3px 14px 14px 14px}
+.ava{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:15px}
+.ava.ai{background:var(--gdim);border:1px solid var(--gbr)}
+.ava.u{background:var(--pdim);border:1px solid var(--pbr);font-size:12px;font-weight:600;color:var(--p)}
 
-/* Markdown in bubble */
-.bub h3{font-size:13.5px;font-weight:600;margin:12px 0 5px;color:var(--t1);display:flex;align-items:center;gap:5px}
-.bub h3:first-child{margin-top:0}
-.bub ul,.bub ol{padding-left:17px;margin:5px 0}
-.bub li{margin:4px 0;color:var(--t2)}
-.bub li strong{color:var(--t1)}
-.bub p{margin:5px 0;color:var(--t2)}
-.bub p:first-child{margin-top:0}
-.bub strong{color:var(--t1);font-weight:600}
-.bub em{color:var(--t2);font-style:italic}
-.bub code{background:var(--bg4);border:1px solid var(--b2);border-radius:4px;padding:1px 5px;font-size:11.5px;font-family:monospace;color:var(--a)}
-.bub blockquote{border-left:3px solid var(--g);padding:5px 11px;background:var(--gdim);border-radius:0 7px 7px 0;margin:7px 0;color:var(--t2);font-size:13px}
-.bub hr{border:none;border-top:1px solid var(--b1);margin:10px 0}
-.bub table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
-.bub th{background:var(--bg3);color:var(--t1);padding:6px 10px;text-align:left;border:1px solid var(--b2);font-weight:600}
-.bub td{padding:5px 10px;border:1px solid var(--b1);color:var(--t2)}
-.bub tr:nth-child(even) td{background:var(--bg3)}
+.content{flex:1;min-width:0}
+.msg.u .content{display:flex;justify-content:flex-end}
 
-/* Sources */
-.srcs{margin-top:11px;padding-top:9px;border-top:1px solid var(--b1)}
-.srcs-title{font-size:10.5px;color:var(--t3);margin-bottom:5px;font-weight:600;letter-spacing:.3px}
-.src-list{display:flex;flex-direction:column;gap:3px}
-.src{display:flex;align-items:flex-start;gap:6px;font-size:11px;padding:5px 8px;background:var(--bg3);border:1px solid var(--b1);border-radius:6px;text-decoration:none;color:var(--t2);transition:all .13s}
-.src:hover{border-color:var(--b2);color:var(--t1)}
-.src-n{font-size:10px;color:var(--t3);flex-shrink:0;margin-top:1px;font-weight:700;min-width:14px}
-.src-t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500;color:var(--t2)}
-.src-d{font-size:10px;color:var(--t3);margin-top:1px}
-.sbadge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:3px 7px;border-radius:9px;background:var(--gdim);border:1px solid var(--gbr);color:var(--g);margin-top:7px;font-weight:500}
+.ubub{background:var(--bg3);border:1px solid var(--b2);border-radius:12px 2px 12px 12px;padding:10px 14px;font-size:14px;line-height:1.65;color:var(--t1);max-width:75%;word-break:break-word}
 
-/* Loading */
-.ldwrap{display:flex;gap:11px;margin-bottom:20px}
-.ldbub{background:var(--bg2);border:1px solid var(--b1);border-radius:3px 14px 14px 14px;padding:12px 16px;max-width:80%}
-.ldstep{font-size:11.5px;color:var(--t3);margin-bottom:8px;display:flex;align-items:center;gap:7px}
-.spin{width:8px;height:8px;border:1.5px solid var(--g);border-top-color:transparent;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;flex-shrink:0}
-@keyframes sp{to{transform:rotate(360deg)}}
-.dots{display:flex;gap:5px}
-.dots span{width:6px;height:6px;border-radius:50%;background:rgba(0,196,122,.15);border:1px solid rgba(0,196,122,.22);animation:db 1.1s ease-in-out infinite}
-.dots span:nth-child(2){animation-delay:.16s;background:rgba(0,196,122,.25)}
-.dots span:nth-child(3){animation-delay:.32s}
-@keyframes db{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.aicontent{font-size:14px;line-height:1.75;color:var(--t1);word-break:break-word}
 
-/* Empty */
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;text-align:center;min-height:55vh}
-.eglow{width:68px;height:68px;background:var(--gdim);border:1px solid var(--gbr);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:16px}
-.empty h2{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
-.empty p{font-size:12.5px;color:var(--t3);max-width:320px;line-height:1.65}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:20px;max-width:440px;width:100%}
-.scard{background:var(--bg2);border:1px solid var(--b1);border-radius:9px;padding:10px 12px;cursor:pointer;text-align:left;font-family:'Be Vietnam Pro',sans-serif;color:var(--t2);font-size:12px;line-height:1.5;transition:all .15s}
-.scard:hover{background:var(--bg3);border-color:var(--b2);color:var(--t1)}
-.sico{font-size:16px;margin-bottom:4px;display:block}
+/* Markdown trong AI reply */
+.aicontent p{margin:0 0 10px;color:var(--t2)}
+.aicontent p:last-child{margin-bottom:0}
+.aicontent p strong{color:var(--t1)}
+.aicontent h1,.aicontent h2,.aicontent h3{font-size:15px;font-weight:600;color:var(--t1);margin:18px 0 8px}
+.aicontent h1:first-child,.aicontent h2:first-child,.aicontent h3:first-child{margin-top:0}
+.aicontent ul,.aicontent ol{padding-left:20px;margin:6px 0 10px}
+.aicontent li{margin:4px 0;color:var(--t2);line-height:1.65}
+.aicontent li strong{color:var(--t1)}
+.aicontent li p{margin:0}
+.aicontent strong{color:var(--t1);font-weight:600}
+.aicontent em{color:var(--t2)}
+.aicontent code{background:var(--bg4);border:1px solid var(--b2);border-radius:4px;padding:1px 5px;font-size:12.5px;font-family:'Menlo','Consolas',monospace;color:var(--a)}
+.aicontent pre{background:var(--bg4);border:1px solid var(--b2);border-radius:8px;padding:12px;overflow-x:auto;margin:10px 0}
+.aicontent pre code{background:none;border:none;padding:0;font-size:12.5px}
+.aicontent blockquote{border-left:3px solid var(--g);padding:6px 12px;background:var(--gdim);border-radius:0 6px 6px 0;margin:10px 0;color:var(--t2);font-size:13.5px}
+.aicontent hr{border:none;border-top:1px solid var(--b1);margin:14px 0}
+.aicontent a{color:var(--g);text-decoration:underline;text-underline-offset:2px}
+.aicontent a:hover{opacity:.8}
+.aicontent table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+.aicontent th{background:var(--bg3);color:var(--t1);padding:7px 11px;text-align:left;border:1px solid var(--b2);font-weight:600}
+.aicontent td{padding:6px 11px;border:1px solid var(--b1);color:var(--t2)}
+.aicontent tr:nth-child(even) td{background:var(--bg2)}
 
-/* Error */
-.errbanner{background:var(--rdim);border:1px solid rgba(240,82,82,.25);border-radius:9px;padding:10px 14px;font-size:12.5px;color:var(--r);margin-bottom:14px;display:none;line-height:1.55}
-.errbanner.show{display:block}
+/* META (sources, badges) dưới mỗi reply */
+.msg-meta{margin-top:10px;display:flex;flex-direction:column;gap:6px}
 
-/* Input */
-.iarea{border-top:1px solid var(--b1);padding:12px 24px 16px;background:var(--bg2);flex-shrink:0}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
-.chip{font-size:11.5px;padding:4px 10px;border-radius:16px;border:1px solid var(--b1);background:var(--bg3);color:var(--t2);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;transition:all .13s;white-space:nowrap}
-.chip:hover{border-color:var(--gbr);color:var(--g);background:var(--gdim)}
-.irow{display:flex;gap:8px;align-items:flex-end}
-.ta{flex:1;background:var(--bg3);border:1px solid var(--b2);border-radius:10px;padding:10px 14px;color:var(--t1);font-size:13.5px;font-family:'Be Vietnam Pro',sans-serif;resize:none;outline:none;min-height:44px;max-height:120px;line-height:1.55;transition:border-color .15s}
-.ta:focus{border-color:var(--gbr)}
+.src-toggle{font-size:11.5px;color:var(--t3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;padding:3px 0;user-select:none;transition:color .13s}
+.src-toggle:hover{color:var(--t2)}
+.src-toggle svg{width:11px;height:11px;transition:transform .2s}
+.src-toggle.open svg{transform:rotate(180deg)}
+
+.src-list{display:none;flex-direction:column;gap:3px;margin-top:4px}
+.src-list.show{display:flex}
+.src-item{display:flex;align-items:flex-start;gap:6px;padding:5px 8px;background:var(--bg3);border:1px solid var(--b1);border-radius:6px;text-decoration:none;transition:all .12s}
+.src-item:hover{border-color:var(--b2);background:var(--bg4)}
+.src-n{font-size:10px;color:var(--t3);font-weight:700;flex-shrink:0;margin-top:1px;min-width:14px}
+.src-title{font-size:11.5px;font-weight:500;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.src-domain{font-size:10px;color:var(--t3);margin-top:1px}
+
+.fetched-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;background:var(--pdim);border:1px solid var(--pbr);border-radius:8px;color:var(--p)}
+.search-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;background:var(--gdim);border:1px solid var(--gbr);border-radius:8px;color:var(--g)}
+
+/* LOADING */
+.loading-msg{display:flex;gap:12px;padding:16px 0}
+.typing{display:flex;align-items:center;gap:5px;padding:4px 0}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--t3);animation:ty 1.3s ease-in-out infinite}
+.typing span:nth-child(2){animation-delay:.18s}
+.typing span:nth-child(3){animation-delay:.36s}
+@keyframes ty{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-5px);opacity:1}}
+.loading-label{font-size:12px;color:var(--t3);margin-top:4px}
+
+/* EMPTY STATE */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:2rem;text-align:center}
+.empty-ico{font-size:40px;margin-bottom:14px}
+.empty h2{font-size:20px;font-weight:600;margin-bottom:6px;color:var(--t1)}
+.empty p{font-size:13.5px;color:var(--t3);max-width:380px;line-height:1.65;margin-bottom:28px}
+.prompts{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:560px;width:100%}
+.prompt-card{background:var(--bg2);border:1px solid var(--b1);border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;transition:all .15s}
+.prompt-card:hover{background:var(--bg3);border-color:var(--b2)}
+.prompt-card .pc-title{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:3px}
+.prompt-card .pc-sub{font-size:11.5px;color:var(--t3);line-height:1.5}
+
+/* ERROR */
+.err-msg{background:var(--rdim);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--r);margin:8px 0;line-height:1.55}
+
+/* INPUT */
+.input-wrap{border-top:1px solid var(--b1);background:var(--bg);padding:12px 16px 14px;flex-shrink:0}
+.input-inner{max-width:760px;margin:0 auto}
+
+.input-box{display:flex;align-items:flex-end;gap:8px;background:var(--bg2);border:1px solid var(--b2);border-radius:12px;padding:8px 8px 8px 14px;transition:border-color .2s}
+.input-box:focus-within{border-color:rgba(16,185,129,.4)}
+
+.ta{flex:1;background:transparent;border:none;outline:none;color:var(--t1);font-size:14px;font-family:'Inter',sans-serif;resize:none;line-height:1.6;min-height:24px;max-height:180px;padding:2px 0}
 .ta::placeholder{color:var(--t3)}
-.sbtn{width:44px;height:44px;background:var(--g);border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;color:#000;font-weight:700;transition:all .15s}
-.sbtn:hover{background:var(--g2);transform:scale(1.05)}
-.sbtn:disabled{opacity:.35;cursor:not-allowed;transform:none}
-.hint{font-size:10.5px;color:var(--t3);margin-top:6px;text-align:center}
 
-@media(max-width:700px){.app{grid-template-columns:1fr}.side{display:none}.chat{padding:14px}.iarea{padding:10px 14px 14px}.tbar{padding:10px 14px}.bub{max-width:93%}}
+.send{width:34px;height:34px;background:var(--g);border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.send:hover{background:#059669;transform:scale(1.05)}
+.send:disabled{background:var(--bg4);cursor:not-allowed;transform:none}
+.send svg{width:15px;height:15px;fill:none;stroke:#000;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.input-hint{font-size:10.5px;color:var(--t3);text-align:center;margin-top:7px}
+
+@media(max-width:680px){
+  .side{display:none}
+  .msgs{padding:16px 14px 8px}
+  .ubub{max-width:90%}
+  .prompts{grid-template-columns:1fr}
+  .input-wrap{padding:10px 12px 12px}
+}
 </style>
 </head>
 <body>
@@ -160,344 +177,428 @@ html,body{height:100%;background:var(--bg);color:var(--t1);font-family:'Be Vietn
 
 <!-- SIDEBAR -->
 <aside class="side">
-  <div class="brand">
-    <div class="brand-row">
-      <div class="b-ico">🔭</div>
-      <span class="b-name">Career Trend AI</span>
-      <div class="live"><div class="ldot"></div>LIVE</div>
-    </div>
-    <div class="b-sub">Groq · Llama 3.3 70B · 2026</div>
-  </div>
-
-  <div class="slabel">Chế độ phân tích</div>
-  <div class="mlist" id="mlist"></div>
-
-  <div class="hist-wrap">
-    <div class="slabel">Lịch sử</div>
-    <div class="hlist" id="hlist">
-      <div style="font-size:11.5px;color:var(--t3);text-align:center;padding:16px 0">Chưa có lịch sử</div>
+  <div class="logo">
+    <div class="logo-ico">🔭</div>
+    <div>
+      <div class="logo-text">Career AI</div>
+      <div class="logo-sub">Llama 3.3 70B · Groq</div>
     </div>
   </div>
-  <button class="newbtn" onclick="newChat()">+ Phân tích mới</button>
+
+  <button class="new-chat" onclick="newChat()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Cuộc hội thoại mới
+  </button>
+
+  <div class="hist-label">Lịch sử</div>
+  <div class="hist" id="hist">
+    <div class="no-hist">Chưa có lịch sử</div>
+  </div>
+
+  <div class="side-footer">
+    <div class="status-row" id="status-row">
+      <div class="dot-off" id="status-dot"></div>
+      <span id="status-text">Đang kết nối...</span>
+    </div>
+  </div>
 </aside>
 
 <!-- MAIN -->
 <main class="main">
-  <div class="tbar">
-    <span class="tmode" id="tmode">🌐 Xu hướng hiện tại</span>
-    <span class="tstatus" id="tstatus">⏳ Đang kết nối...</span>
-    <span class="tmodel">Llama 3.3 70B · Groq</span>
-  </div>
-
   <div class="chat" id="chat">
-    <div class="errbanner" id="err"></div>
-    <div id="area">
-      <div class="empty" id="estate">
-        <div class="eglow">🔭</div>
-        <h2>Career Trend AI — 2026</h2>
-        <p>Tìm kiếm web thời gian thực + phân tích bằng Llama 3.3 70B qua Groq. Hoàn toàn miễn phí.</p>
-        <div class="sgrid" id="sgrid"></div>
+    <!-- EMPTY STATE -->
+    <div class="empty" id="empty">
+      <div class="empty-ico">🔭</div>
+      <h2>Career AI — 2026</h2>
+      <p>Hỏi bất cứ điều gì về nghề nghiệp, thị trường lao động, lương thưởng. Gửi link để AI đọc và phân tích. Tự động tìm kiếm web khi cần.</p>
+      <div class="prompts">
+        <div class="prompt-card" onclick="usePr('Lương ngành AI tại Việt Nam hiện nay khoảng bao nhiêu? So sánh senior vs junior?')">
+          <div class="pc-title">💰 Lương ngành AI 2026</div>
+          <div class="pc-sub">Mức lương thực tế, so sánh cấp bậc tại Việt Nam</div>
+        </div>
+        <div class="prompt-card" onclick="usePr('Ngành nào đang phát triển mạnh nhất ở Việt Nam năm 2026? Đâu là cơ hội tốt nhất?')">
+          <div class="pc-title">📈 Ngành hot nhất 2026</div>
+          <div class="pc-sub">Xu hướng thực tế, cơ hội việc làm hiện tại</div>
+        </div>
+        <div class="prompt-card" onclick="usePr('Có đúng không khi nói AI sẽ thay thế lập trình viên trong 5 năm tới? Thực hư như thế nào?')">
+          <div class="pc-title">🔍 Fact-check: AI thay thế dev?</div>
+          <div class="pc-sub">Kiểm định thông tin, phân tích đa chiều</div>
+        </div>
+        <div class="prompt-card" onclick="usePr('Tôi đang là sinh viên IT năm 3, nên học thêm gì để dễ xin việc nhất?')">
+          <div class="pc-title">🎓 Sinh viên IT nên học gì?</div>
+          <div class="pc-sub">Lời khuyên thực tế, kỹ năng được săn đón</div>
+        </div>
       </div>
     </div>
+
+    <!-- MESSAGES -->
+    <div class="msgs" id="msgs" style="display:none"></div>
   </div>
 
-  <div class="iarea">
-    <div class="chips" id="chips"></div>
-    <div class="irow">
-      <textarea class="ta" id="ta" rows="1" placeholder="Nhập câu hỏi về xu hướng nghề nghiệp..."></textarea>
-      <button class="sbtn" id="sbtn" onclick="send()" title="Gửi">➤</button>
+  <!-- INPUT -->
+  <div class="input-wrap">
+    <div class="input-inner">
+      <div class="input-box">
+        <textarea class="ta" id="ta" placeholder="Hỏi bất cứ thứ gì, hoặc dán link để AI đọc..." rows="1"></textarea>
+        <button class="send" id="send-btn" onclick="send()">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="input-hint">Enter gửi &nbsp;·&nbsp; Shift+Enter xuống dòng &nbsp;·&nbsp; Dán link để AI đọc nội dung</div>
     </div>
-    <div class="hint">Enter gửi · Shift+Enter xuống dòng</div>
   </div>
 </main>
 </div>
 
 <script>
-// ─────────────────────────────
-// DATA
-// ─────────────────────────────
-const MODES=[
-  {
-    id:'realtime',icon:'🌐',title:'Xu hướng hiện tại',desc:'Web search thời gian thực',
-    chips:['Top ngành hot 2026','AI Engineer Việt Nam','Remote jobs lương cao','Kỹ năng hot nhất 2026'],
-    sugs:[
-      {i:'📊',t:'Ngành nào đang tuyển nhiều nhất và trả lương cao nhất năm 2026?'},
-      {i:'💰',t:'Mức lương trung bình ngành AI / Machine Learning tại Việt Nam?'},
-      {i:'🌏',t:'Xu hướng Remote Work và Hybrid Work tại Việt Nam 2026?'},
-      {i:'🔥',t:'Top 5 kỹ năng kỹ thuật được săn đón nhất hiện nay?'},
-    ],
-    sys:`Bạn là chuyên gia phân tích thị trường lao động Việt Nam và toàn cầu năm 2026.
-Nhiệm vụ: Phân tích xu hướng nghề nghiệp HIỆN TẠI dựa trên kết quả tìm kiếm web được cung cấp.
-Yêu cầu bắt buộc:
-- Luôn trích dẫn nguồn cụ thể: "Theo [tên nguồn], ..."
-- Nêu số liệu cụ thể (lương, % tăng trưởng, số lượng job posting)
-- Đánh giá độ tin cậy: ✅ Đã xác minh / ⚠️ Cần kiểm tra thêm
-- So sánh Việt Nam với khu vực Đông Nam Á
-- Kết luận thực tế và lời khuyên cụ thể
-Format: dùng ## heading, bullet points, in đậm số liệu quan trọng.
-Trả lời tiếng Việt, rõ ràng và có giá trị thực tế.`
-  },
-  {
-    id:'history',icon:'📈',title:'Phân tích lịch sử',desc:'Xu hướng qua các giai đoạn',
-    chips:['IT Việt Nam 2019-2026','Ngành chết vì COVID','Fintech tăng trưởng','Sự nổi lên của AI jobs'],
-    sugs:[
-      {i:'📅',t:'Thị trường IT Việt Nam đã thay đổi như thế nào từ 2019 đến 2026?'},
-      {i:'💥',t:'COVID-19 đã tiêu diệt và tạo ra những ngành nghề nào?'},
-      {i:'🏦',t:'Lịch sử tăng trưởng của Fintech và Banking số tại Việt Nam?'},
-      {i:'🤖',t:'AI jobs xuất hiện và bùng nổ như thế nào trong 3 năm qua?'},
-    ],
-    sys:`Bạn là nhà phân tích lịch sử thị trường lao động, chuyên sâu về Việt Nam và Đông Nam Á.
-Phân tích theo timeline rõ ràng:
-- Trước COVID: 2018-2019
-- Trong COVID: 2020-2021
-- Hậu COVID + AI bùng nổ: 2022-2023
-- Kỷ nguyên AI: 2024-2026
-Dựa trên kết quả tìm kiếm, hãy:
-- Trích dẫn số liệu tăng trưởng/sụt giảm theo từng năm
-- Nêu sự kiện cụ thể làm thay đổi thị trường
-- So sánh với khu vực Đông Nam Á và toàn cầu
-- Rút ra bài học và pattern lịch sử
-Format: ## cho mỗi giai đoạn, bullet points cho số liệu, bảng so sánh nếu phù hợp.
-Trả lời tiếng Việt.`
-  },
-  {
-    id:'predict',icon:'🔮',title:'Dự đoán tương lai',desc:'Xu hướng 2026-2035',
-    chips:['Top 10 ngành 2030','AI thay thế nghề gì?','Kỹ năng sinh tồn 2030','Green jobs Việt Nam'],
-    sugs:[
-      {i:'🤖',t:'AI và tự động hóa sẽ xóa sổ những nghề nào trong 5 năm tới?'},
-      {i:'🎯',t:'Kỹ năng gì cần học ngay bây giờ để không bị tụt hậu đến 2030?'},
-      {i:'🌱',t:'Green Economy và Climate Tech sẽ tạo ra bao nhiêu việc làm mới?'},
-      {i:'🚀',t:'Top 10 ngành nghề có tương lai sáng nhất từ 2026 đến 2035?'},
-    ],
-    sys:`Bạn là chuyên gia dự báo xu hướng nghề nghiệp với tư duy phân tích dữ liệu nghiêm túc. Năm hiện tại là 2026.
-Dựa trên kết quả tìm kiếm về báo cáo WEF Future of Jobs 2025, McKinsey, OECD, Goldman Sachs:
-- Đưa ra dự báo CÓ CĂN CỨ từ nguồn uy tín
-- Ghi rõ mức độ tin cậy: 🟢 Cao (consensus nhiều nguồn) / 🟡 Trung bình / 🔴 Suy đoán
-- Kịch bản lạc quan (best case) vs thách thức (worst case)
-- Lời khuyên riêng cho: sinh viên / người đi làm 5 năm / người trên 35 tuổi / doanh nghiệp
-- DISCLAIMER rõ ràng: đây là dự báo dựa trên dữ liệu, không phải sự thật tuyệt đối
-Trả lời tiếng Việt, có cấu trúc chặt chẽ.`
-  },
-  {
-    id:'verify',icon:'🔍',title:'Kiểm chứng thông tin',desc:'Fact-check tin tức nghề nghiệp',
-    chips:['IT có chết vì AI không?','Lương 500tr có thật?','Blockchain còn sống?','Data Science bão hòa?'],
-    sugs:[
-      {i:'❓',t:'Có đúng là AI sẽ xóa sổ 50% việc làm trong 10 năm không?'},
-      {i:'💸',t:'Lương AI Engineer tại Việt Nam có thực sự lên đến 500 triệu/năm?'},
-      {i:'⛓️',t:'Blockchain / Web3 thực sự thất bại hay đang âm thầm hồi sinh?'},
-      {i:'📉',t:'Thị trường Data Science thực sự bão hòa hay vẫn còn cơ hội?'},
-    ],
-    sys:`Bạn là chuyên gia fact-checking thông tin thị trường lao động với tư duy phê phán và đòi hỏi bằng chứng cao.
-Tìm kiếm và đối chiếu tối thiểu 3 nguồn độc lập (bao gồm cả nguồn ủng hộ và phản biện).
-THANG ĐÁNH GIÁ bắt buộc:
-✅ ĐÚNG — Bằng chứng mạnh, nhất quán từ nhiều nguồn uy tín
-⚠️ MỘT PHẦN ĐÚNG — Đúng trong context hạn chế, cần thêm điều kiện
-❌ SAI / PHÓNG ĐẠI — Thiếu bằng chứng, bị méo mó hoặc lấy ra khỏi context
-🔄 CHƯA ĐỦ DỮ LIỆU — Cần nghiên cứu thêm
-
-Format bắt buộc:
-1. **VERDICT:** [một trong 4 nhãn trên]
-2. **Bằng chứng ủng hộ:** (trích nguồn cụ thể)
-3. **Bằng chứng phản biện:** (trích nguồn cụ thể)
-4. **Context quan trọng:** (điều kiện, ngoại lệ)
-5. **Kết luận thực tế:** (lời khuyên cho người đọc)
-Trả lời tiếng Việt.`
-  },
-];
-
-// ─────────────────────────────
+// ─────────────────────────
 // STATE
-// ─────────────────────────────
-let mode=MODES[0], msgs=[], busy=false, hist=[];
+// ─────────────────────────
+let history = [];
+let busy    = false;
+let histLog = [];   // [{title, msgs}]
 
-// ─────────────────────────────
+// ─────────────────────────
 // BOOT
-// ─────────────────────────────
-function boot(){
-  renderModes(); renderSugs(); renderChips(); setupTA(); checkHealth();
-}
+// ─────────────────────────
+(function boot() {
+  setupTA();
+  checkHealth();
+})();
 
-async function checkHealth(){
-  try{
-    const d=await(await fetch('/api/health')).json();
-    const el=document.getElementById('tstatus');
-    if(d.search){el.textContent='🌐 Web Search ON';el.className='tstatus on';}
-    else{el.textContent='📚 Web Search OFF';el.className='tstatus';}
-  }catch{document.getElementById('tstatus').textContent='⚠ Server offline';}
-}
-
-function renderModes(){
-  document.getElementById('mlist').innerHTML=MODES.map(m=>`
-    <button class="mbtn${m.id===mode.id?' on':''}" onclick="setMode('${m.id}')">
-      <span class="mico">${m.icon}</span>
-      <div><div class="mtitle">${m.title}</div><div class="mdesc">${m.desc}</div></div>
-    </button>`).join('');
-}
-
-function renderSugs(){
-  const g=document.getElementById('sgrid');
-  if(!g)return;
-  g.innerHTML=mode.sugs.map(s=>`
-    <button class="scard" onclick="useSug(${JSON.stringify(s.t)})">
-      <span class="sico">${s.i}</span>${xe(s.t)}
-    </button>`).join('');
-}
-
-function renderChips(){
-  document.getElementById('chips').innerHTML=mode.chips.map(c=>`
-    <button class="chip" onclick="useSug(${JSON.stringify(c)})">${xe(c)}</button>`).join('');
-}
-
-function renderHist(){
-  const el=document.getElementById('hlist');
-  if(!hist.length){el.innerHTML='<div style="font-size:11.5px;color:var(--t3);text-align:center;padding:16px 0">Chưa có lịch sử</div>';return;}
-  el.innerHTML=hist.slice(0,30).map(h=>{
-    const m=MODES.find(x=>x.id===h.mode);
-    return`<div class="hitem">${m?m.icon:'📌'} ${xe(h.text)}</div>`;
-  }).join('');
-}
-
-function setMode(id){
-  mode=MODES.find(m=>m.id===id);
-  renderModes(); renderChips();
-  document.getElementById('tmode').textContent=`${mode.icon} ${mode.title}`;
-  document.getElementById('ta').placeholder=`Câu hỏi về ${mode.title.toLowerCase()}...`;
-  renderSugs();
-}
-
-function useSug(t){
-  const ta=document.getElementById('ta');
-  ta.value=t; resize(ta); send();
-}
-
-function newChat(){
-  msgs=[];
-  document.getElementById('area').innerHTML=`
-    <div class="empty" id="estate">
-      <div class="eglow">🔭</div>
-      <h2>Career Trend AI — 2026</h2>
-      <p>Tìm kiếm web thời gian thực + phân tích bằng Llama 3.3 70B qua Groq. Hoàn toàn miễn phí.</p>
-      <div class="sgrid" id="sgrid"></div>
-    </div>`;
-  renderSugs(); hideErr();
-}
-
-function setupTA(){
-  const ta=document.getElementById('ta');
-  ta.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
-  ta.addEventListener('input',()=>resize(ta));
-}
-function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
-
-// ─────────────────────────────
-// SEND
-// ─────────────────────────────
-async function send(){
-  if(busy)return;
-  const ta=document.getElementById('ta');
-  const q=ta.value.trim();
-  if(!q)return;
-
-  document.getElementById('estate')?.remove();
-  hideErr();
-  ta.value=''; resize(ta);
-  busy=true; document.getElementById('sbtn').disabled=true;
-
-  addMsg('u',`<p style="margin:0">${xe(q)}</p>`);
-  hist.unshift({mode:mode.id,text:q.length>50?q.slice(0,50)+'…':q});
-  renderHist();
-
-  const lid='ld'+Date.now();
-  addLoading(lid);
-  msgs.push({role:'user',content:q});
-
-  try{
-    const res=await fetch('/api/analyze',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({query:q,system:mode.sys,history:msgs.slice(0,-1),mode:mode.id})
-    });
-    const d=await res.json();
-    removeEl(lid);
-
-    if(d.error){showErr(d.error);msgs.pop();}
-    else{
-      msgs.push({role:'assistant',content:d.answer});
-      let html=md(d.answer);
-
-      if(d.sources?.length){
-        html+=`<div class="srcs">
-          <div class="srcs-title">📡 ${d.sources.length} nguồn tìm kiếm thực tế</div>
-          <div class="src-list">${d.sources.slice(0,5).map((s,i)=>`
-            <a class="src" href="${xe(s.link)}" target="_blank" rel="noopener">
-              <span class="src-n">${i+1}</span>
-              <div><div class="src-t">${xe(s.title)}</div><div class="src-d">${xe(s.source)}</div></div>
-            </a>`).join('')}
-          </div>
-          <div class="sbadge">⚡ Llama 3.3 70B · Groq · Dữ liệu thời gian thực</div>
-        </div>`;
+async function checkHealth() {
+  try {
+    const d = await (await fetch('/api/health')).json();
+    const dot  = document.getElementById('status-dot');
+    const text = document.getElementById('status-text');
+    if (d.groq) {
+      dot.className  = 'dot-live';
+      if (d.search) {
+        text.textContent = 'Groq · Web Search bật';
+      } else {
+        text.textContent = 'Groq · Không có Web Search';
       }
-      addMsg('ai',html);
+    } else {
+      text.textContent = '⚠ Chưa có GROQ_API_KEY';
     }
-  }catch(e){
-    removeEl(lid); showErr('Lỗi: '+e.message); msgs.pop();
+  } catch {
+    document.getElementById('status-text').textContent = '⚠ Server offline';
+  }
+}
+
+function setupTA() {
+  const ta = document.getElementById('ta');
+  ta.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  ta.addEventListener('input', () => {
+    ta.style.height = 'auto';
+    ta.style.height = Math.min(ta.scrollHeight, 180) + 'px';
+  });
+}
+
+// ─────────────────────────
+// SEND
+// ─────────────────────────
+async function send() {
+  if (busy) return;
+  const ta  = document.getElementById('ta');
+  const msg = ta.value.trim();
+  if (!msg) return;
+
+  showMsgs();
+  ta.value = '';
+  ta.style.height = 'auto';
+  busy = true;
+  document.getElementById('send-btn').disabled = true;
+
+  appendUserMsg(msg);
+
+  // Lưu lịch sử sidebar
+  if (history.length === 0) {
+    histLog.unshift({ title: msg.slice(0, 55), msgs: history });
+    renderHist();
   }
 
-  busy=false; document.getElementById('sbtn').disabled=false;
-  document.getElementById('ta').focus();
+  history.push({ role: 'user', content: msg });
+
+  const lid = appendLoading();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ message: msg, history: history.slice(0, -1) }),
+    });
+
+    const d = await res.json();
+    removeEl(lid);
+
+    if (d.error) {
+      appendError(d.error);
+      history.pop();
+    } else {
+      history.push({ role: 'assistant', content: d.answer });
+      appendAIMsg(d.answer, d.sources || [], d.fetchedLinks || [], d.didSearch);
+    }
+  } catch (e) {
+    removeEl(lid);
+    appendError('Lỗi kết nối: ' + e.message);
+    history.pop();
+  }
+
+  busy = false;
+  document.getElementById('send-btn').disabled = false;
+  ta.focus();
 }
 
-// ─────────────────────────────
+function usePr(text) {
+  document.getElementById('ta').value = text;
+  send();
+}
+
+function newChat() {
+  history = [];
+  document.getElementById('msgs').innerHTML = '';
+  document.getElementById('empty').style.display = '';
+  document.getElementById('msgs').style.display = 'none';
+  document.querySelectorAll('.hitem').forEach(el => el.classList.remove('active'));
+}
+
+// ─────────────────────────
 // DOM HELPERS
-// ─────────────────────────────
-function addMsg(role,html){
-  const a=document.getElementById('area');
-  const d=document.createElement('div');
-  d.className=`msg ${role}`;
-  d.innerHTML=`<div class="ava ${role}">${role==='ai'?'🔭':'U'}</div><div class="bub">${html}</div>`;
-  a.appendChild(d);
-  d.scrollIntoView({behavior:'smooth',block:'end'});
+// ─────────────────────────
+function showMsgs() {
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('msgs').style.display  = '';
 }
 
-function addLoading(id){
-  const a=document.getElementById('area');
-  const d=document.createElement('div');
-  d.id=id; d.className='ldwrap';
-  d.innerHTML=`<div class="ava ai">🔭</div>
-    <div class="ldbub">
-      <div class="ldstep"><div class="spin"></div>Đang tìm kiếm web thời gian thực...</div>
-      <div class="dots"><span></span><span></span><span></span></div>
+function appendUserMsg(text) {
+  const area = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = 'msg u';
+  d.innerHTML = `
+    <div class="ava u">U</div>
+    <div class="content">
+      <div class="ubub">${xe(text).replace(/\n/g,'<br>')}</div>
     </div>`;
-  a.appendChild(d);
-  d.scrollIntoView({behavior:'smooth',block:'end'});
+  area.appendChild(d);
+  scroll();
 }
 
-function removeEl(id){document.getElementById(id)?.remove();}
-function showErr(m){const e=document.getElementById('err');e.textContent='⚠ '+m;e.className='errbanner show';}
-function hideErr(){document.getElementById('err').className='errbanner';}
+function appendAIMsg(text, sources, fetchedLinks, didSearch) {
+  const area = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = 'msg ai';
 
-// ─────────────────────────────
+  // Build meta
+  let meta = '';
+  if (fetchedLinks.length > 0) {
+    meta += `<span class="fetched-badge">🔗 Đã đọc ${fetchedLinks.length} link</span> `;
+  }
+  if (didSearch && sources.length > 0) {
+    const srcId = 'src_' + Date.now();
+    meta += `<span class="search-badge" onclick="toggleSrc('${srcId}')" style="cursor:pointer">
+      🌐 ${sources.length} nguồn web
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" id="arr_${srcId}" style="width:10px;height:10px;transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    </span>
+    <div class="src-list" id="${srcId}">
+      ${sources.slice(0,6).map((s,i)=>`
+        <a class="src-item" href="${xe(s.link)}" target="_blank" rel="noopener">
+          <span class="src-n">${i+1}</span>
+          <div style="min-width:0">
+            <div class="src-title">${xe(s.title)}</div>
+            <div class="src-domain">${xe(s.source)}</div>
+          </div>
+        </a>`).join('')}
+    </div>`;
+  }
+
+  d.innerHTML = `
+    <div class="ava ai">🔭</div>
+    <div class="content">
+      <div class="aicontent">${mdToHtml(text)}</div>
+      ${meta ? `<div class="msg-meta">${meta}</div>` : ''}
+    </div>`;
+  area.appendChild(d);
+  scroll();
+}
+
+function appendLoading() {
+  const area = document.getElementById('msgs');
+  const id = 'ld_' + Date.now();
+  const d = document.createElement('div');
+  d.id = id;
+  d.className = 'loading-msg';
+  d.innerHTML = `
+    <div class="ava ai">🔭</div>
+    <div>
+      <div class="typing"><span></span><span></span><span></span></div>
+      <div class="loading-label">Đang tìm kiếm và phân tích...</div>
+    </div>`;
+  area.appendChild(d);
+  scroll();
+  return id;
+}
+
+function appendError(msg) {
+  const area = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = 'msg ai';
+  d.innerHTML = `
+    <div class="ava ai">🔭</div>
+    <div class="content">
+      <div class="err-msg">⚠ ${xe(msg)}</div>
+    </div>`;
+  area.appendChild(d);
+  scroll();
+}
+
+function toggleSrc(id) {
+  const el  = document.getElementById(id);
+  const arr = document.getElementById('arr_' + id);
+  const open = el.classList.toggle('show');
+  if (arr) arr.style.transform = open ? 'rotate(180deg)' : '';
+}
+
+function renderHist() {
+  const el = document.getElementById('hist');
+  if (!histLog.length) {
+    el.innerHTML = '<div class="no-hist">Chưa có lịch sử</div>';
+    return;
+  }
+  el.innerHTML = histLog.map((h, i) =>
+    `<div class="hitem${i===0?' active':''}" onclick="loadHist(${i})">${xe(h.title)}</div>`
+  ).join('');
+}
+
+function loadHist(i) {
+  // Simplified: just show the title, reset chat
+  newChat();
+}
+
+function removeEl(id) { document.getElementById(id)?.remove(); }
+function scroll() {
+  const c = document.getElementById('msgs');
+  if (c) c.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  // also scroll chat container
+  const chat = document.getElementById('chat');
+  setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 100);
+}
+
+// ─────────────────────────
 // MARKDOWN → HTML
-// ─────────────────────────────
-function md(t){
-  let h=xe(t)
-    .replace(/^#{1,3} (.+)$/gm,'<h3>$1</h3>')
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,'<em>$1</em>')
-    .replace(/`(.+?)`/g,'<code>$1</code>')
-    .replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>')
-    .replace(/^[-•*] (.+)$/gm,'<li>$1</li>')
-    .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g,m=>`<ul>${m}</ul>`)
-    .replace(/^---+$/gm,'<hr>')
-    .replace(/\n{2,}/g,'</p><p>')
-    .replace(/\n/g,'<br>');
-  if(!h.startsWith('<'))h=`<p>${h}</p>`;
-  return h;
-}
-function xe(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+// (proper parser, không dùng regex đơn giản)
+// ─────────────────────────
+function mdToHtml(raw) {
+  // Xử lý từng dòng
+  const lines = raw.split('\n');
+  let html    = '';
+  let inUL    = false;
+  let inOL    = false;
+  let inPre   = false;
+  let preBlock = '';
 
-boot();
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+
+    // Code block
+    if (line.startsWith('```')) {
+      if (!inPre) {
+        inPre = true;
+        preBlock = '';
+      } else {
+        html += `<pre><code>${xe(preBlock.trimEnd())}</code></pre>`;
+        inPre = false;
+        preBlock = '';
+      }
+      continue;
+    }
+    if (inPre) { preBlock += line + '\n'; continue; }
+
+    // Close lists nếu không còn list item
+    if (inUL && !line.match(/^[-*•] /)) { html += '</ul>'; inUL = false; }
+    if (inOL && !line.match(/^\d+\. /))  { html += '</ol>'; inOL = false; }
+
+    // Headings
+    if (line.match(/^### /)) { html += `<h3>${inline(line.slice(4))}</h3>`; continue; }
+    if (line.match(/^## /))  { html += `<h2>${inline(line.slice(3))}</h2>`; continue; }
+    if (line.match(/^# /))   { html += `<h1>${inline(line.slice(2))}</h1>`; continue; }
+
+    // Horizontal rule
+    if (line.match(/^---+$/)) { html += '<hr>'; continue; }
+
+    // Unordered list
+    if (line.match(/^[-*•] /)) {
+      if (!inUL) { html += '<ul>'; inUL = true; }
+      html += `<li>${inline(line.replace(/^[-*•] /, ''))}</li>`;
+      continue;
+    }
+
+    // Ordered list
+    if (line.match(/^\d+\. /)) {
+      if (!inOL) { html += '<ol>'; inOL = true; }
+      html += `<li>${inline(line.replace(/^\d+\. /, ''))}</li>`;
+      continue;
+    }
+
+    // Blockquote
+    if (line.match(/^> /)) {
+      html += `<blockquote>${inline(line.slice(2))}</blockquote>`;
+      continue;
+    }
+
+    // Empty line → paragraph break
+    if (line.trim() === '') {
+      html += '</p><p>';
+      continue;
+    }
+
+    // Normal text
+    html += inline(line) + ' ';
+  }
+
+  // Close open lists
+  if (inUL) html += '</ul>';
+  if (inOL) html += '</ol>';
+  if (inPre) html += `<pre><code>${xe(preBlock)}</code></pre>`;
+
+  // Wrap in paragraph, clean up empty <p>
+  html = `<p>${html}</p>`
+    .replace(/<p>\s*<\/p>/g, '')
+    .replace(/<p>\s*(<[uo]l>)/g, '$1')
+    .replace(/(<\/[uo]l>)\s*<\/p>/g, '$1')
+    .replace(/<p>\s*(<h[123]>)/g, '$1')
+    .replace(/(<\/h[123]>)\s*<\/p>/g, '$1')
+    .replace(/<p>\s*(<blockquote>)/g, '$1')
+    .replace(/(<\/blockquote>)\s*<\/p>/g, '$1')
+    .replace(/<p>\s*(<pre>)/g, '$1')
+    .replace(/(<\/pre>)\s*<\/p>/g, '$1')
+    .replace(/<p>\s*(<hr>)/g, '$1')
+    .replace(/(<hr>)\s*<\/p>/g, '$1');
+
+  return html;
+}
+
+// Inline formatting (bold, italic, code, links)
+function inline(s) {
+  return xe(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/__(.+?)__/g, '<strong>$1</strong>')
+    .replace(/_(.+?)_/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\[(.+?)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/(https?:\/\/[^\s<>"]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+
+function xe(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
 </script>
 </body>
 </html>
