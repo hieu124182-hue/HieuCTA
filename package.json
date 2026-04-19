@@ -1,7 +1,7 @@
 {
-  "name": "career-ai-groq",
-  "version": "2.0.0",
-  "description": "AI phân tích xu hướng nghề nghiệp — Groq llama-3.3-70b + Google Search (100% miễn phí)",
+  "name": "career-ai-v3",
+  "version": "3.0.0",
+  "description": "Career Trend AI v3 — Groq + Google Search + Link Reader",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
